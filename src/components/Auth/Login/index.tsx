@@ -26,11 +26,7 @@ const LoginPage: React.FC<IPropsLogin> = ({
         label='Email'
         variant='outlined'
         placeholder='Введите ваш емейл'
-        {...register('email', {
-          required: 'Это обязательное поле',
-          pattern:
-            /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/,
-        })}
+        {...register('email')}
         error={!!errors.email}
         helperText={errors.email ? `${errors.email.message}` : ''}
         type='email'
@@ -43,10 +39,7 @@ const LoginPage: React.FC<IPropsLogin> = ({
         label='Password'
         variant='outlined'
         placeholder='Введите ваш пароль'
-        {...register('password', {
-          required: 'Это обязательное поле',
-          minLength: 6,
-        })}
+        {...register('password')}
         error={errors.password ? true : false}
         helperText={errors.password ? `${errors.password.message}` : ''}
       />
