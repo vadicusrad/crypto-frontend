@@ -8,8 +8,7 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import React, { useContext } from 'react';
-import { useAppSelector } from '../../utils/hook';
+import React, { FC, useContext } from 'react';
 import { ColorModeContext } from '../../theme';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -18,7 +17,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import { useStyles } from './styles';
 import FlexBetween from '../Flex-between';
-const TopBar = ({ isOpen, setIsOpen }: any) => {
+import { ITopBarProps } from '../../common/types/topBar';
+
+const TopBar: FC<ITopBarProps> = ({
+  isOpen,
+  setIsOpen,
+}: ITopBarProps): JSX.Element => {
   const theme = useTheme();
   const colorMode: any = useContext(ColorModeContext);
   const classes = useStyles();
@@ -59,32 +63,6 @@ const TopBar = ({ isOpen, setIsOpen }: any) => {
         </Box>
       </Toolbar>
     </AppBar>
-    // <Box className={classes.root}>
-    //   <Grid>Welcome, Alex </Grid>
-    //   <Box className={classes.navWrapper}>
-    //     <Grid className={classes.iconBlock}>
-    //       <IconButton
-    //         onClick={colorMode.toggleColorMode}
-    //         className={classes.themeIcon}
-    //       >
-    //         {theme.palette.mode === 'dark' ? (
-    //           <DarkModeIcon />
-    //         ) : (
-    //           <LightModeIcon />
-    //         )}
-    //       </IconButton>
-    //       <IconButton>
-    //         <NotificationsNoneIcon />
-    //       </IconButton>
-    //     </Grid>
-    //     <Grid className={classes.searchBlock}>
-    //       <IconButton className={classes.searchIcon}>
-    //         <SearchIcon />
-    //       </IconButton>
-    //       <InputBase className={classes.searchInput} placeholder='Поиск...' />
-    //     </Grid>
-    //   </Box>
-    // </Box>
   );
 };
 
