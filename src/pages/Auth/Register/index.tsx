@@ -3,11 +3,13 @@ import React from 'react';
 import { IPropsRegister } from '../../../common/types/auth';
 import { useStyles } from '../styles';
 import AppButton from '../../../components/AppButton';
+import AppLoadingButton from '../../../components/LoadingButton';
 
 const RegisterPage: React.FC<IPropsRegister> = ({
   register,
   errors,
   navigate,
+  loading,
 }: IPropsRegister): JSX.Element => {
   const classes = useStyles();
   return (
@@ -73,7 +75,8 @@ const RegisterPage: React.FC<IPropsRegister> = ({
           errors.confirmPassword ? `${errors.confirmPassword.message}` : ''
         }
       />
-      <AppButton
+      <AppLoadingButton
+        loading={loading}
         type='submit'
         sx={{
           marginTop: 2,
@@ -83,7 +86,7 @@ const RegisterPage: React.FC<IPropsRegister> = ({
         variant='contained'
       >
         Регистрация
-      </AppButton>
+      </AppLoadingButton>
       <Typography variant='body1'>
         У вас есть аккаунт?{' '}
         <span
