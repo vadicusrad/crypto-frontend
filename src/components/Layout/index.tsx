@@ -5,7 +5,7 @@ import { Box, useMediaQuery } from '@mui/material';
 import SideBar from '../Sidebar';
 import { useStyles } from './styles';
 
-const LayoutComponent = () => {
+const LayoutComponent: React.FC = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const isNonMobile = useMediaQuery('(min-width:600px)');
@@ -30,7 +30,12 @@ const LayoutComponent = () => {
           setIsOpen={setIsOpen}
         />
         <Box className={classes.mainSection}>
-          <TopBar isOpen={isOpen} setIsOpen={setIsOpen} />
+          <TopBar
+            isNonMobile={isNonMobile}
+            drowerWidth='250px'
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+          />
           <Outlet />
         </Box>
       </Box>

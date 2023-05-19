@@ -1,42 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useStyles } from './styles';
 import {
   Drawer,
-  Divider,
   Box,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Grid,
   IconButton,
   Typography,
   useTheme,
-  colors,
 } from '@mui/material';
 import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined';
-import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
-import AutoGraphOutlinedIcon from '@mui/icons-material/AutoGraphOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { useLocation, useNavigate } from 'react-router-dom';
 import FlexBetween from '../Flex-between';
 import { navMenu } from '../../common/mocks/navigate';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import { tokens } from '../../theme';
 import Logo from '../../assets/images/logo.svg';
+import { ISidebarProps } from '../../common/types/sidebar';
 
-const SideBar = (props: any) => {
+const SideBar: FC<ISidebarProps> = (props: ISidebarProps): JSX.Element => {
   const [active, setActive] = React.useState('');
   const { isNonMobile, drowerWidth, isOpen, setIsOpen } = props;
   const classes = useStyles();
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
 
   useEffect(() => {
-    setActive(pathname.substring(1));
+    setActive(pathname);
   }, [pathname]);
 
   const renderNavMenu = navMenu.map((item): JSX.Element => {
@@ -44,7 +37,11 @@ const SideBar = (props: any) => {
       <ListItem key={item.id}>
         <ListItemButton
           onClick={() => navigate(item.path)}
-          className={classes.navItem}
+          className={
+            active === item.path
+              ? `${classes.navItem} ${classes.active}`
+              : classes.navItem
+          }
         >
           <ListItemIcon>
             <item.icon />
