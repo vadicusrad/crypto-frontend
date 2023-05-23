@@ -31,15 +31,14 @@ export const useStyles = makeStyles((theme: Theme) => {
     },
     itemDetails: {
       display: 'flex',
-      height: '100%',
       flexDirection: 'column',
       justifyContent: 'flex-end',
-      paddingBottom: '35px',
     },
     cardPrice: {
       fontSize: 32,
       fontWeight: 700,
       lineHeight: '48px',
+      margin: 0,
     },
     priceTrend: {
       width: 80,
