@@ -28,11 +28,14 @@ export const useStyles = makeStyles((theme: Theme) => {
       fontWeight: 600,
       lineHeight: '30px',
       textTransform: 'capitalize',
+      margin: 0,
     },
     itemDetails: {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'flex-end',
+      height: '100%',
+      paddingBottom: '20px',
     },
     cardPrice: {
       fontSize: 32,
@@ -41,10 +44,11 @@ export const useStyles = makeStyles((theme: Theme) => {
       margin: 0,
     },
     priceTrend: {
-      width: 80,
+      width: '20%',
       display: 'flex',
       alignItems: 'center',
-      padding: '2px',
+      justifyContent: 'space-around',
+      padding: '4px',
       borderRadius: 4,
     },
     trendUp: {
