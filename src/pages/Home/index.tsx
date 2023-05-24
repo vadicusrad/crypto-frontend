@@ -6,6 +6,7 @@ import { useStyles } from './styles';
 import AreaChart from '../../components/charts/area-chart';
 import TrendUpIcon from '../../assets/images/chart/trend-up.svg';
 import TrendDownIcon from '../../assets/images/chart/trend-down.svg';
+import LineChart from '../../components/charts/line-chart';
 const Home: FC = (): JSX.Element => {
   const favoriteAssets = useAppSelector((state) => state.assets.favoriteAssets);
   const dispatch = useAppDispatch();
@@ -70,7 +71,7 @@ const Home: FC = (): JSX.Element => {
             </div>
           </Grid>
           <Grid item xs={12} sm={6} lg={6}>
-            <AreaChart data={element.data} />
+            <AreaChart data={element.price_chart_data} />
           </Grid>
         </Grid>
       </Grid>
@@ -79,8 +80,13 @@ const Home: FC = (): JSX.Element => {
 
   return (
     <Box className={classes.root}>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} className={classes.areaChart}>
         {renderFavoriteBlock}
+      </Grid>
+      <Grid container className={classes.lineChartBlock}>
+        <Grid item xs={12} sm={12} lg={12}>
+          {filteredArray.length && <LineChart data={filteredArray} />}
+        </Grid>
       </Grid>
     </Box>
   );
