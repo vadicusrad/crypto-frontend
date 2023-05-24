@@ -3,12 +3,15 @@ import { useAppDispatch, useAppSelector } from '../../utils/hook';
 import { getFavoriteAssets } from '../../store/thunks/assets';
 import { Box, Grid } from '@mui/material';
 import { useStyles } from './styles';
-import AreaChart from '../../components/charts/area-chart';
+import AreaChart from '../../components/Charts/Area-chart';
 import TrendUpIcon from '../../assets/images/chart/trend-up.svg';
 import TrendDownIcon from '../../assets/images/chart/trend-down.svg';
-import LineChart from '../../components/charts/line-chart';
+import LineChart from '../../components/Charts/Line-chart';
+import { IChartData, ISingleAsset } from '../../common/types/assets';
 const Home: FC = (): JSX.Element => {
-  const favoriteAssets = useAppSelector((state) => state.assets.favoriteAssets);
+  const favoriteAssets: IChartData[] = useAppSelector(
+    (state) => state.assets.favoriteAssets
+  );
   const dispatch = useAppDispatch();
   const fetchDataRef = useRef(false);
   const classes = useStyles();
@@ -36,17 +39,15 @@ const Home: FC = (): JSX.Element => {
     fetchData(favoriteAssetName);
   }, [favoriteAssetName, fetchData]);
 
-  const renderFavoriteBlock = filteredArray.map((element: any) => {
-    const currentPrice = element.singleAsset.map(
-      (element: any) => element.current_price
-    );
-    const currentCap = element.singleAsset.map(
-      (element: any) => element.market_cap
-    );
+  const renderFavoriteBlock = filteredArray.map((element: IChartData) => {
+    let currentPrice = 0;
+    let changePrice = 0;
 
-    const changePrice = element.singleAsset.map(
-      (element: any) => element.price_change_percentage_24h
-    );
+    element.singleAsset.forEach((element: ISingleAsset) => {
+      currentPrice = element.current_price;
+      changePrice = element.price_change_percentage_24h;
+    });
+
     return (
       <Grid item lg={6} sm={6} xs={12} key={element.name}>
         <Grid container className={classes.topCardItem}>

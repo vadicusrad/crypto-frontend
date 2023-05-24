@@ -1,14 +1,14 @@
 export interface IAreaChartProps {
-  data: [number[]];
+  data: number[][];
 }
 
 export interface IChartData {
   name: string;
   price_chart_data: number[][];
-  singleAsset: SingleAsset[];
+  singleAsset: ISingleAsset[];
 }
 
-export interface SingleAsset {
+export interface ISingleAsset {
   id: string;
   name: string;
   symbol: string;
@@ -32,6 +32,12 @@ export interface SingleAsset {
   atl: number;
   atl_change_percentage: number;
   atl_date: Date;
-  roi: any;
+  roi: Roi;
   last_updated: Date;
+}
+
+export interface Roi {
+  times: number;
+  currency: string;
+  percentage: number;
 }
