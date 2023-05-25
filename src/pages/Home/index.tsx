@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../utils/hook';
-import { getFavoriteAssets } from '../../store/thunks/assets';
+import { getFavoriteAssets, getTopPriceData } from '../../store/thunks/assets';
 import { Box, Grid } from '@mui/material';
 import { useStyles } from './styles';
 import AreaChart from '../../components/Charts/Area-chart';
@@ -8,10 +8,16 @@ import TrendUpIcon from '../../assets/images/chart/trend-up.svg';
 import TrendDownIcon from '../../assets/images/chart/trend-down.svg';
 import LineChart from '../../components/Charts/Line-chart';
 import { IChartData, ISingleAsset } from '../../common/types/assets';
+import TopPrice from '../../components/TopPrice';
 const Home: FC = (): JSX.Element => {
   const favoriteAssets: IChartData[] = useAppSelector(
     (state) => state.assets.favoriteAssets
   );
+
+  const assetsArray: any = useAppSelector((state) => state.assets.assets);
+
+  console.log('assetsArray ', assetsArray);
+
   const dispatch = useAppDispatch();
   const fetchDataRef = useRef(false);
   const classes = useStyles();
@@ -28,16 +34,25 @@ const Home: FC = (): JSX.Element => {
 
   const favoriteAssetName = useMemo(() => ['bitcoin', 'ethereum'], []);
   // Фильтруем массив удаляя одинаковые элементы. Так при переходе на страницы не будет лишних одинаковых графиков.
-  const filteredArray = favoriteAssets.filter(
-    (value: any, index: number, self: any[]) =>
-      index === self.findIndex((t) => t.name === value.name)
-  );
+  const filteredArray = useMemo(() => {
+    return favoriteAssets.filter(
+      (value: any, index: number, self: any[]) =>
+        index === self.findIndex((t) => t.name === value.name)
+    );
+  }, [favoriteAssets]);
+
+  const fiteredAssetArray = useMemo(() => {
+    return assetsArray
+      .slice()
+      .sort((a: any, b: any) => b.current_price - a.current_price);
+  }, [assetsArray]);
 
   useEffect(() => {
     if (fetchDataRef.current) return;
     fetchDataRef.current = true;
     fetchData(favoriteAssetName);
-  }, [favoriteAssetName, fetchData]);
+    dispatch(getTopPriceData());
+  }, [favoriteAssetName, fetchData, dispatch]);
 
   const renderFavoriteBlock = filteredArray.map((element: IChartData) => {
     let currentPrice = 0;
@@ -87,6 +102,13 @@ const Home: FC = (): JSX.Element => {
       <Grid container className={classes.lineChartBlock}>
         <Grid item xs={12} sm={12} lg={12}>
           {filteredArray.length && <LineChart data={filteredArray} />}
+        </Grid>
+      </Grid>
+      <Grid container className={classes.topPriceRoot}>
+        <Grid item xs={12} sm={12} lg={12}>
+          {fiteredAssetArray.length && (
+            <TopPrice assets={fiteredAssetArray.slice(0, 6)} />
+          )}
         </Grid>
       </Grid>
     </Box>
