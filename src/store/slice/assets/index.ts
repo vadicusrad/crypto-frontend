@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getFavoriteAssets } from '../../thunks/assets';
+import { getFavoriteAssets, getTopPriceData } from '../../thunks/assets';
 
 const initialState = {
   assets: [],
   favoriteAssets: [],
 };
 
-export const asserSlice = createSlice({
+export const assetSlice = createSlice({
   name: 'assets',
   initialState,
   reducers: {},
@@ -14,7 +14,10 @@ export const asserSlice = createSlice({
     builder.addCase(getFavoriteAssets.fulfilled, (state: any, action: any) => {
       state.favoriteAssets.push(action.payload);
     });
+    builder.addCase(getTopPriceData.fulfilled, (state: any, action: any) => {
+      state.assets = action.payload;
+    });
   },
 });
 
-export default asserSlice.reducer;
+export default assetSlice.reducer;

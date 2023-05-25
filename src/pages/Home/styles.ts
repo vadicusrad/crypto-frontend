@@ -44,7 +44,7 @@ export const useStyles = makeStyles((theme: Theme) => {
       margin: 0,
     },
     priceTrend: {
-      width: '20%',
+      width: '80px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-around',
