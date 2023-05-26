@@ -11,6 +11,7 @@ import {
   IconButton,
   Typography,
   useTheme,
+
 } from '@mui/material';
 import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
@@ -19,6 +20,8 @@ import FlexBetween from '../Flex-between';
 import { navMenu } from '../../common/mocks/navigate';
 import Logo from '../../assets/images/logo.svg';
 import { ISidebarProps } from '../../common/types/sidebar';
+import ThemeSwitcher from '../ThemeSwitcher';
+import SearchBar from '../SearchBar';
 
 const SideBar: FC<ISidebarProps> = (props: ISidebarProps): JSX.Element => {
   const [active, setActive] = React.useState('');
@@ -88,10 +91,22 @@ const SideBar: FC<ISidebarProps> = (props: ISidebarProps): JSX.Element => {
                 )}
               </FlexBetween>
             </Box>
+            {!isNonMobile && (
+              <ListItem>
+                <SearchBar />
+              </ListItem>
+            )}
             <List className={classes.navList}>{renderNavMenu}</List>
           </Box>
           <Box width='100%'>
             <List>
+              {!isNonMobile && (
+                <ListItem>
+                  <Box px='10px'>
+                    <ThemeSwitcher />
+                  </Box>
+                </ListItem>
+              )}
               <ListItem>
                 <ListItemButton className={classes.navItem}>
                   <ListItemIcon>

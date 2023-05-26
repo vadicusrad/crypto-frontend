@@ -21,16 +21,6 @@ const Home: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const fetchDataRef = useRef(false);
   const classes = useStyles();
-  console.log('favoriteAssets ', favoriteAssets);
-
-  const fetchData = useCallback(
-    async (data: string[]) => {
-      data.forEach((asset: string) => {
-        dispatch(getFavoriteAssets(asset));
-      });
-    },
-    [dispatch]
-  );
 
   const favoriteAssetName = useMemo(() => ['bitcoin', 'ethereum'], []);
   // Фильтруем массив удаляя одинаковые элементы. Так при переходе на страницы не будет лишних одинаковых графиков.
@@ -41,11 +31,18 @@ const Home: FC = (): JSX.Element => {
     );
   }, [favoriteAssets]);
 
-  const fiteredAssetArray = useMemo(() => {
-    return assetsArray
-      .slice()
-      .sort((a: any, b: any) => b.current_price - a.current_price);
-  }, [assetsArray]);
+  const fiteredAssetArray = assetsArray
+    .slice()
+    .sort((a: any, b: any) => b.current_price - a.current_price);
+
+  const fetchData = useCallback(
+    (data: string[]) => {
+      data.forEach((asset: string) => {
+        dispatch(getFavoriteAssets(asset));
+      });
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     if (fetchDataRef.current) return;
