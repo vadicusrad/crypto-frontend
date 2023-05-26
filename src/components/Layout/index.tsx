@@ -8,7 +8,7 @@ import { useStyles } from './styles';
 const LayoutComponent: React.FC = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const isNonMobile = useMediaQuery('(min-width:600px)');
+  const isNonMobile = useMediaQuery('(min-width:760px)');
   const classes = useStyles();
 
   return location.pathname === '/login' || location.pathname === '/register' ? (
