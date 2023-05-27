@@ -11,6 +11,7 @@ import Home from './pages/Home';
 import News from './pages/News';
 import Settings from './pages/Settings';
 import AuthRootComponent from './pages/Auth';
+import SingleAsset from './pages/SingleAsset';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -27,6 +28,7 @@ function App() {
                 <Route path='watchlist' element={<Watchlist />} />
                 <Route path='news' element={<News />} />
                 <Route path='settings' element={<Settings />} />
+                <Route path='single/:id' element={<SingleAsset />} />
               </Route>
               <Route path='login' element={<AuthRootComponent />} />
               <Route path='register' element={<AuthRootComponent />} />
