@@ -1,6 +1,6 @@
 export interface ISidebarProps {
-  isNonMobile: boolean;
-  drowerWidth: string;
-  isOpen: boolean;
-  setIsOpen: (value: boolean) => void;
+    isNonMobile: boolean
+    drawerWidth: string
+    isOpen: boolean
+    setIsOpen: (value: boolean) => void
 }

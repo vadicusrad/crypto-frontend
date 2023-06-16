@@ -1,17 +1,15 @@
 import React from 'react';
-
+import HomePage from './pages/home';
 import { Route, Routes } from 'react-router-dom';
-import PrivateRoute from './utils/Router/PrivateRoute';
-
+import AuthRootPage from './pages/auth';
 import { ColorModeContext, useMode } from './theme';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import LayoutComponent from './components/Layout';
-import Watchlist from './pages/Watchlist';
-import Home from './pages/Home';
-import News from './pages/News';
-import Settings from './pages/Settings';
-import AuthRootComponent from './pages/Auth';
-import SingleAsset from './pages/SingleAsset';
+import LayoutComponent from './components/layout';
+import WatchlistPage from './pages/watchlist';
+import NewsPage from './pages/news';
+import SettingsPage from './pages/settings';
+import SingleAssetPage from './pages/single-asset';
+import PrivateRoute from './utils/router/privateRoute';
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -19,19 +17,18 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-
         <div className='App'>
           <Routes>
             <Route element={<LayoutComponent />}>
               <Route element={<PrivateRoute />}>
-                <Route path='/' element={<Home />} />
-                <Route path='watchlist' element={<Watchlist />} />
-                <Route path='news' element={<News />} />
-                <Route path='settings' element={<Settings />} />
-                <Route path='single/:id' element={<SingleAsset />} />
+                <Route path='/' element={<HomePage />} />
+                <Route path='/watchlist' element={<WatchlistPage />} />
+                <Route path='/news' element={<NewsPage />} />
+                <Route path='/settings' element={<SettingsPage />} />
+                <Route path='/single/:id' element={<SingleAssetPage />} />
               </Route>
-              <Route path='login' element={<AuthRootComponent />} />
-              <Route path='register' element={<AuthRootComponent />} />
+              <Route path='login' element={<AuthRootPage />} />
+              <Route path='register' element={<AuthRootPage />} />
             </Route>
           </Routes>
         </div>

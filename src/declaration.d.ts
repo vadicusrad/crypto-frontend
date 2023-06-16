@@ -1,2 +1,2 @@
-declare module '@mui/material/styles';
-declare module '*.svg';
+declare module '@mui/material/styles'
+declare module '*.svg'
