@@ -90,3 +90,18 @@ export const updateUserPassord = createAsyncThunk(
     }
   }
 );
+
+export const deleteUser = createAsyncThunk(
+  'users/delete-user',
+  async (_, { rejectWithValue }) => {
+    try {
+      return await instanceAuth.delete('users');
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);

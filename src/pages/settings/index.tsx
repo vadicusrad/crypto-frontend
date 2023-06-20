@@ -11,6 +11,7 @@ import SettingsPersonalInfo from '../../components/settings-personal-info';
 import { useAppDispatch } from '../../utils/hook';
 import { getPublicUser } from '../../store/thunks/auth';
 import ChangePassword from '../../components/change-password';
+import DeleteUser from '../../components/delete-user';
 
 const SettingsPage = () => {
   const [value, setValue] = React.useState(0);
@@ -52,7 +53,7 @@ const SettingsPage = () => {
         <ChangePassword />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <DeleteUser />
       </TabPanel>
     </Grid>
   );
