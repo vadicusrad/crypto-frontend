@@ -10,6 +10,7 @@ import { tokens } from '../../theme';
 import SettingsPersonalInfo from '../../components/settings-personal-info';
 import { useAppDispatch } from '../../utils/hook';
 import { getPublicUser } from '../../store/thunks/auth';
+import ChangePassword from '../../components/change-password';
 
 const SettingsPage = () => {
   const [value, setValue] = React.useState(0);
@@ -48,7 +49,7 @@ const SettingsPage = () => {
         <SettingsPersonalInfo />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <ChangePassword />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three

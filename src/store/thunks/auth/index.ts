@@ -19,6 +19,7 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+
 export const registerUser = createAsyncThunk(
   'auth/register',
   async (data: IRegisterData, { rejectWithValue }) => {
@@ -62,6 +63,24 @@ export const updateUserInfo = createAsyncThunk(
 
       sessionStorage.setItem('name', user.data.firstName);
       return user.data;
+    } catch (error: any) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const updateUserPassord = createAsyncThunk(
+  'users/change-password',
+  async (
+    data: { oldPassword: string; newPassword: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      return await instanceAuth.patch('users/change-password', data);
     } catch (error: any) {
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
