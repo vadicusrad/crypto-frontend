@@ -7,14 +7,14 @@ import {
   Typography,
   useTheme,
 } from '@mui/material';
-import React from 'react';
+import React, { FC } from 'react';
 import { useAppDispatch } from '../../utils/hook';
 import { deleteUser } from '../../store/thunks/auth';
 import { useStyles } from './styles';
 import { tokens } from '../../theme';
 import { useNavigate } from 'react-router-dom';
 
-const DeleteUser = () => {
+const DeleteUser: FC = (): JSX.Element => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const dispatch = useAppDispatch();

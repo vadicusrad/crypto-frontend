@@ -1,17 +1,17 @@
 import { Box, Grid, TextField } from '@mui/material';
-import React from 'react';
+import React, { FC } from 'react';
 import { useStyles } from './styles';
 import AppLoadingButton from '../loading-button';
 import { useAppDispatch } from '../../utils/hook';
 import { updateUserPassord } from '../../store/thunks/auth';
 
-const ChangePassword = () => {
+const ChangePassword: FC = (): JSX.Element => {
   const [newPassword, setNewPassword] = React.useState('');
   const [oldPassword, setOldPassword] = React.useState('');
   const classes = useStyles();
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     dispatch(
       updateUserPassord({
@@ -20,6 +20,7 @@ const ChangePassword = () => {
       })
     );
   };
+
   return (
     <Grid
       component='form'
