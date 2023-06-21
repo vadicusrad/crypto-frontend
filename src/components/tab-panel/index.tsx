@@ -1,8 +1,8 @@
-import React from 'react';
-import { TabPanelProps } from '../../common/types/tabs';
+import React, { FC } from 'react';
+import { ITabPanelProps } from '../../common/types/tabs';
 import { Box } from '@mui/material';
 
-function TabPanel(props: TabPanelProps) {
+const TabPanel: FC<ITabPanelProps> = (props: ITabPanelProps): JSX.Element => {
   const { children, value, index, ...other } = props;
 
   return (
@@ -16,6 +16,6 @@ function TabPanel(props: TabPanelProps) {
       {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
-}
+};
 
 export default TabPanel;

@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../utils/hook';
 import { Box, Grid, TextField } from '@mui/material';
 import { useStyles } from './styles';
 import AppLoadingButton from '../loading-button';
-import { updateUserInfo } from '../../store/thunks/auth';
+import { getPublicUser, updateUserInfo } from '../../store/thunks/auth';
 
-const SettingsPersonalInfo = () => {
+const SettingsPersonalInfo: FC = (): JSX.Element => {
   const classes = useStyles();
   const [userInfo, setUserInfo] = React.useState({
     name: '',
@@ -24,7 +24,7 @@ const SettingsPersonalInfo = () => {
       });
   }, [user]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     const data = {
       username: userInfo.username,
@@ -33,6 +33,7 @@ const SettingsPersonalInfo = () => {
     };
 
     dispatch(updateUserInfo(data));
+    dispatch(getPublicUser());
   };
   return (
     <Grid

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,7 +12,6 @@ import {
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
 import { ILineChartProps } from '../../../common/types/assets';
-// import { ILineChartProps } from '../../../common/types/assets'
 
 ChartJS.register(
   CategoryScale,
@@ -24,7 +23,7 @@ ChartJS.register(
   Legend
 );
 
-const LineChart = (props: ILineChartProps) => {
+const LineChart: FC<ILineChartProps> = (props: ILineChartProps) => {
   const { data } = props;
 
   const options = {

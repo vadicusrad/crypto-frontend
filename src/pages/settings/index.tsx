@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import TabPanel from '../../components/TabPanel';
 import { tabProps } from '../../utils/helpers';
 import { Grid, useTheme } from '@mui/material';
 import { useStyles } from './styles';
@@ -12,8 +11,9 @@ import { useAppDispatch } from '../../utils/hook';
 import { getPublicUser } from '../../store/thunks/auth';
 import ChangePassword from '../../components/change-password';
 import DeleteUser from '../../components/delete-user';
+import TabPanel from '../../components/tab-panel';
 
-const SettingsPage = () => {
+const SettingsPage: FC = (): JSX.Element => {
   const [value, setValue] = React.useState(0);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);

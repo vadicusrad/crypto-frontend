@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../utils/hook';
 import { getNews } from '../../store/thunks/news';
 import { Box, Grid, Typography } from '@mui/material';
 import { useStyles } from './styles';
 import { Link } from 'react-router-dom';
 
-const NewsPage = () => {
+const NewsPage: FC = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { news } = useAppSelector((state) => state.news);
-  console.log(news);
-
   const classes = useStyles();
 
   useEffect(() => {

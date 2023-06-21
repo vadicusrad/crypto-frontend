@@ -43,7 +43,6 @@ export const getPublicUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const user = await instanceAuth.get('auth/get-public-user-info');
-
       return user.data;
     } catch (error: any) {
       if (error.response && error.response.data.message) {
@@ -60,7 +59,6 @@ export const updateUserInfo = createAsyncThunk(
   async (data: any, { rejectWithValue }) => {
     try {
       const user = await instanceAuth.patch('users', data);
-
       sessionStorage.setItem('name', user.data.firstName);
       return user.data;
     } catch (error: any) {
